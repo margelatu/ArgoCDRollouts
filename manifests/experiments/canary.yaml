@@ -8,15 +8,15 @@ spec:
     - name: experiment-canary
       selector:
         matchLabels:
-          service: functional-tests-rollout
+          app: functional-tests-rollout
       template:
         metadata:
           labels:
-            service: functional-tests-rollout
+            app: functional-tests-rollout
         spec:
           containers:
             - name: functional-tests
-              image: ghcr.io/argocon22workshop/rollouts-demo:green
+              image: argoproj/rollouts-demo:purple
               ports:
                 - name: http
                   containerPort: 8080
