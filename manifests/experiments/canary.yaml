@@ -3,7 +3,6 @@ kind: Experiment
 metadata:
   name: experiment-canary
 spec:
-  duration: 5m
   templates:
     - name: experiment-canary
       selector:
@@ -24,6 +23,7 @@ spec:
   analyses:
     - name: tests
       templateName: functional-test-analysis
+      requiredForCompletion: true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
@@ -48,13 +48,13 @@ spec:
     canary:
       steps:
         - experiment:
-            duration: 10m
             templates:
               - name: experiment-canary
                 specRef: experiment-canary
             analyses:
               - name: tests
                 templateName: functional-test-analysis
+                requiredForCompletion: true
         - setWeight: 20
         - pause: {duration: 5m}
         - setWeight: 80
