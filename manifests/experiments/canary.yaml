@@ -52,6 +52,9 @@ spec:
             templates:
               - name: experiment-canary
                 specRef: experiment-canary
+            analyses:
+              - name: tests
+                templateName: functional-test-analysis
         - setWeight: 20
         - pause: {duration: 5m}
         - setWeight: 80
