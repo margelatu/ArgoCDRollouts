@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Experiment
+metadata:
+  name: experiment-canary
+spec:
+  duration: 5m
+  templates:
+    - name: experiment-canary
+      selector:
+        matchLabels:
+          app: functional-tests-rollout
+      template:
+        spec:
+          containers:
+            - name: functional-tests
+              image: ghcr.io/argocon22workshop/rollouts-demo:green
+              ports:
+                - name: http
+                  containerPort: 8080
+                  protocol: TCP
+  analyses:
+    - name: tests
+      templateName: functional-test-analysis
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: functional-tests-rollout
+spec:
+  replicas: 4
+  strategy:
+    canary:
+      steps:
+        - experiment:
+            duration: 10m
+            templates:
+              - name: experiment-canary
+                specRef: experiment-canary
+        - setWeight: 20
+        - pause: {duration: 5m}
+        - setWeight: 80
+        - pause: {duration: 5m}

@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: functional-test-analysis
+spec:
+  metrics:
+    - name: tests
+      provider:
+        job:
+          spec:
+            template:
+              spec:
+                containers:
+                  - name: functional-tests
+                    image: busybox
+                    command: ["/bin/sh"]
+                    args: ["-c", "echo \"running tests\"; exit 1"]
+                restartPolicy: Never
+            backoffLimit: 0
