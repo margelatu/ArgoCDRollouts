@@ -10,6 +10,9 @@ spec:
         matchLabels:
           app: functional-tests-rollout
       template:
+        metadata:
+          labels:
+            app: functional-tests-rollout
         spec:
           containers:
             - name: functional-tests
