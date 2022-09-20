@@ -40,7 +40,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:1.15.3
+          image: nginx:1.15.4
           ports:
             - containerPort: 80
   replicas: 4
