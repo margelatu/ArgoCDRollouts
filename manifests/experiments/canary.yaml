@@ -6,6 +6,7 @@ spec:
   duration: 5m
   templates:
     - name: experiment-canary
+      template:
         spec:
           containers:
             - name: functional-tests
