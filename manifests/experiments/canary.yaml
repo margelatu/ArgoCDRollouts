@@ -30,6 +30,19 @@ kind: Rollout
 metadata:
   name: functional-tests-rollout
 spec:
+  selector:
+    matchLabels:
+      app: ft-r
+  template:
+    metadata:
+      labels:
+        app: ft-r
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.15.4
+          ports:
+            - containerPort: 80
   replicas: 4
   strategy:
     canary:
