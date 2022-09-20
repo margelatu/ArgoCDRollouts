@@ -8,11 +8,11 @@ spec:
     - name: experiment-canary
       selector:
         matchLabels:
-          app: functional-tests-exp
+          app: ft-r
       template:
         metadata:
           labels:
-            app: functional-tests-exp
+            app: ft-r
         spec:
           containers:
             - name: functional-tests
