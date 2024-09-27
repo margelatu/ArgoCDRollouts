@@ -6,6 +6,7 @@ spec:
   generators:
     - pullRequest:
         # Short requeue time so we don't have to set up a webhook.
+        # Boom
         requeueAfterSeconds: 15
         github:
           owner: margelatu # Replace this with your GitHub username.
